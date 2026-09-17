@@ -12,8 +12,8 @@
  *
  * | 热点 | 命中框投影 | 屏幕中心 |
  * |---|---|---|
- * | SKILLS 唱片机 | 227 × 282 px | (494, 244) |
- * | SELECTED WORK 文件盒 | 245 × 223 px | (544, 468) |
+ * | EXPERIENCE 唱片机 | 227 × 282 px | (494, 244) |
+ * | WORK 文件盒 | 245 × 223 px | (544, 468) |
  * | CONTACT 打字机 | 307 × 232 px | (738, 794) |
  * | ABOUT 工牌 | 见下 | (736, 156) |
  *
@@ -58,8 +58,8 @@ export type HotspotSpec = {
 export const HOTSPOTS: readonly HotspotSpec[] = [
   {
     id: 'skills',
-    label: 'SKILLS 个人技能',
-    caption: '个人技能',
+    label: 'EXPERIENCE 实习经历',
+    caption: '实习经历',
     at: [-0.522, 1.705, 0.03],
     frame: 'world',
     size: [0.72, 0.9],
@@ -67,7 +67,7 @@ export const HOTSPOTS: readonly HotspotSpec[] = [
   },
   {
     id: 'work',
-    label: 'SELECTED WORK 作品展示',
+    label: 'WORK 作品展示',
     caption: '作品展示',
     at: [-0.37, 0.972, -0.04],
     frame: 'world',
