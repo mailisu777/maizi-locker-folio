@@ -49,11 +49,69 @@ function Shell({ eyebrow, title, children }: { eyebrow: string; title: string; c
   )
 }
 
+function AboutCopy({ block }: { block: ContentBlock }) {
+  return <>{block.paragraphs?.map((p) => <p key={p}>{p}</p>)}</>
+}
+
 export function AboutV4() {
+  const [intro, sjc, keep, project, method, ai, value] = ABOUT_V4
+
   return (
     <Shell eyebrow="01 / PROFILE" title="ABOUT">
-      <div className="pc__stack">
-        {ABOUT_V4.map((block) => <Block key={block.title} block={block} />)}
+      <div className="aboutv4">
+        <section className="aboutv4__intro">
+          <div>
+            <p className="aboutv4__kicker">LI YUEYUE · 2027</p>
+            <h3>内容策划 × 社媒运营 × AI 内容生产</h3>
+          </div>
+          <div className="aboutv4__intro-copy">
+            <p className="aboutv4__meta">{intro.subtitle}</p>
+            <AboutCopy block={intro} />
+          </div>
+        </section>
+
+        <section className="aboutv4__experience">
+          <div className="aboutv4__section-title">
+            <span>01</span>
+            <h3>EXPERIENCE SNAPSHOT</h3>
+          </div>
+          <div className="aboutv4__timeline">
+            <article className="aboutv4__job">
+              <div className="aboutv4__job-no">01 / SJC</div>
+              <h4>{sjc.title}</h4>
+              <AboutCopy block={sjc} />
+            </article>
+            <article className="aboutv4__job aboutv4__job--dark">
+              <div className="aboutv4__job-no">02 / KEEP</div>
+              <h4>{keep.title}</h4>
+              <AboutCopy block={keep} />
+            </article>
+          </div>
+        </section>
+
+        <section className="aboutv4__result">
+          <div className="aboutv4__section-title">
+            <span>02</span>
+            <h3>PROJECT SIGNAL</h3>
+          </div>
+          <div className="aboutv4__result-grid">
+            <div className="aboutv4__result-number">2.94% → 19.44%</div>
+            <div className="aboutv4__result-copy">
+              <h4>{project.title}</h4>
+              <AboutCopy block={project} />
+            </div>
+          </div>
+        </section>
+
+        <section className="aboutv4__cards">
+          {[method, ai, value].map((block, index) => (
+            <article className="aboutv4__card" key={block.title}>
+              <span>0{index + 3}</span>
+              <h4>{block.title}</h4>
+              <AboutCopy block={block} />
+            </article>
+          ))}
+        </section>
       </div>
     </Shell>
   )
