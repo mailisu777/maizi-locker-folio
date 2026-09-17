@@ -277,7 +277,6 @@ function ProjectDetail({ item }: { item: CaseItem }) {
     <article className="pc__detail">
       <header className="pc__detail-head">
         <span>{item.no}</span>
-        <h3>{item.title}</h3>
         {item.subtitle && <p>{item.subtitle}</p>}
       </header>
       <div className="pc__accordions">
