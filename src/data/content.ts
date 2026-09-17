@@ -14,8 +14,8 @@ export const CREDIT = {
 
 export const NAV = [
   { id: 'about', label: 'ABOUT' },
-  { id: 'skills', label: 'SKILLS' },
-  { id: 'work', label: 'SELECTED WORK' },
+  { id: 'skills', label: 'EXPERIENCE' },
+  { id: 'work', label: 'WORK' },
   { id: 'contact', label: 'CONTACT' },
 ] as const
 
