@@ -157,7 +157,7 @@ function Shell({ eyebrow, title, breadcrumb, onBack, children }: {
           <button className="pc__close" type="button" onClick={closeOverlay} aria-label="关闭">×</button>
         </header>
         <div className="pc__viewport">
-          <header className={`pc__page-title${title.length > 12 ? ' pc__page-title--compact' : ''}`}>
+          <header className={`pc__page-title${title.length > 7 ? ' pc__page-title--compact' : ''}`}>
             <h2>{title}</h2>
             <p>点击文件夹，逐层查看</p>
           </header>
