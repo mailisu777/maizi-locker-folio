@@ -19,6 +19,13 @@ type FolderVisual = {
   images: string[]
 }
 
+type MediaItem = {
+  src: string
+  caption: string
+}
+
+type SectionMedia = Record<string, MediaItem[]>
+
 const KEEP_CASE_MEDIA = [
   ['/media/portfolio/keep/yyao-card-01.webp', '/media/portfolio/keep/yyao-douyin.webp', '/media/portfolio/keep/yyao-xhs.webp', '/media/portfolio/keep/yyao-card-02.webp', '/media/portfolio/keep/yyao-research.webp'],
   ['/media/portfolio/keep/kjiao-video-01.webp', '/media/portfolio/keep/kjiao-video-02.webp', '/media/portfolio/keep/kjiao-comment-01.webp', '/media/portfolio/keep/kjiao-skill.webp', '/media/portfolio/keep/kjiao-sop.webp'],
@@ -36,6 +43,96 @@ const WORK_VISUALS: FolderVisual[] = [
   { kicker: 'PROJECT 05', title: 'NEXT WINTER', subtitle: '定格动画创作', tone: 'smoke', images: ['/media/portfolio/work/stopmotion.webp', '/media/portfolio/work/stopmotion-story.webp'] },
   { kicker: 'PROJECT 06', title: '红动粤东', subtitle: '数字人微课', tone: 'violet', images: ['/media/portfolio/work/aigc.webp', '/media/portfolio/work/aigc-program.webp'] },
 ]
+
+const SECTION_MEDIA: Record<string, SectionMedia> = {
+  '谢幺幺爱跳操': {
+    账号问题: [
+      { src: '/media/portfolio/keep/yyao-douyin.webp', caption: '抖音账号主页｜卡点游戏系列上线后的内容呈现' },
+      { src: '/media/portfolio/keep/yyao-xhs.webp', caption: '小红书账号主页｜同一系列在不同平台的分发情况' },
+    ],
+    我们怎么找方向: [{ src: '/media/portfolio/keep/yyao-research.webp', caption: '前期调研与视频拉片｜从同赛道内容中拆解可复用机制' }],
+    我做了什么: [
+      { src: '/media/portfolio/keep/yyao-card-01.webp', caption: '第一期封面｜(G)I-DLE 卡点瘦手臂' },
+      { src: '/media/portfolio/keep/yyao-card-02.webp', caption: '第二期封面｜NewJeans 卡点瘦腿' },
+      { src: '/media/portfolio/keep/yyao-card-03.webp', caption: '第三期封面｜Tomboy 卡点瘦手瘦背' },
+    ],
+  },
+  'K 教｜AI 漫剧 × 消费品': {
+    '代表案例｜《金斧头银斧头》': [
+      { src: '/media/portfolio/keep/kjiao-video-01.webp', caption: '《金斧头银斧头》关键画面｜消费品直接参与剧情选择' },
+      { src: '/media/portfolio/keep/kjiao-video-02.webp', caption: 'K 教 AI 漫剧画面｜保持角色人设与剧情表达一致' },
+    ],
+    结果: [
+      { src: '/media/portfolio/keep/kjiao-comment-01.webp', caption: '评论区反馈｜观众主动讨论剧情与产品植入' },
+      { src: '/media/portfolio/keep/kjiao-comment-02.webp', caption: '评论区反馈｜“广告自然”成为高频正向评价' },
+    ],
+    流程沉淀: [
+      { src: '/media/portfolio/keep/kjiao-skill.webp', caption: 'K 教人设 Skill｜固定说话方式、反应链和内容边界' },
+      { src: '/media/portfolio/keep/kjiao-sop.webp', caption: 'AI 视频生成 SOP｜人物、场景、分镜与连续性检查流程' },
+    ],
+  },
+  'Keep 官方账号': {
+    我参与的内容: [{ src: '/media/portfolio/keep/official-storyboard.webp', caption: '脚本与分镜｜从选题判断到镜头执行的细化方案' }],
+    'AI 创意短片': [
+      { src: '/media/portfolio/keep/official-video.webp', caption: '官号 AI 创意短片关键画面｜统一人物、场景与品牌视觉' },
+      { src: '/media/portfolio/keep/official-comment-01.webp', caption: '发布后评论反馈｜观众对创意形式的直接反应' },
+      { src: '/media/portfolio/keep/official-comment-02.webp', caption: '发布后评论反馈｜内容理解与互动情况' },
+    ],
+  },
+  '兔子运动 IP': {
+    前期调研: [{ src: '/media/portfolio/keep/rabbit-strategy.webp', caption: '世界观与人设策略｜梳理四个角色的定位与关系' }],
+    我的工作: [
+      { src: '/media/portfolio/keep/rabbit-turnaround.webp', caption: '兔子角色三视图｜用于稳定身体比例、轮廓与服装结构' },
+      { src: '/media/portfolio/keep/rabbit-portrait.webp', caption: '角色面部与形象参考｜用于稳定五官、表情和角色识别' },
+    ],
+    'AI 生产优化': [{ src: '/media/portfolio/keep/rabbit-scene.webp', caption: '角色场景测试｜分别控制角色参考、空间与光线' }],
+    现阶段验证重点: [{ src: '/media/portfolio/keep/rabbit-flow.webp', caption: 'IP 内容生产流程｜从角色设定到内容验证的完整路径' }],
+  },
+  商业内容制作与交付: {
+    工作内容: [{ src: '/media/portfolio/work/sjc.webp', caption: '商业项目现场｜参与策划、拍摄、剪辑、修改与最终交付' }],
+  },
+  '三创赛｜直播电商运营': {
+    项目目标: [{ src: '/media/portfolio/work/sanchuang.webp', caption: '项目整体呈现｜从账号搭建到直播转化的运营实践' }],
+    '我的工作 / 职责': [{ src: '/media/portfolio/work/sanchuang-social.webp', caption: '账号内容与直播执行｜短视频、直播脚本及多平台运营' }],
+    项目成果: [{ src: '/media/portfolio/work/sanchuang-results.webp', caption: '项目成果｜比赛获奖与内容数据结果' }],
+  },
+  数字人直播间: {
+    项目说明: [{ src: '/media/portfolio/work/digitalhuman.webp', caption: '数字人直播间｜为本土蜂蜜品牌搭建虚拟主播形象与场景' }],
+    '我的工作 / 职责': [{ src: '/media/portfolio/work/digitalhuman-backend.webp', caption: '直播后台设置｜数字人系统、语料与互动流程配置' }],
+  },
+  解困式报道: {
+    项目说明: [
+      { src: '/media/portfolio/work/solution.webp', caption: '解困式报道项目｜以真实办学困境为内容入口' },
+      { src: '/media/portfolio/work/solution-video.webp', caption: '系列纪实短视频｜围绕学校自我解困过程展开叙事' },
+    ],
+    '我的工作 / 职责': [{ src: '/media/portfolio/work/research.webp', caption: '实地调研与访谈｜为选题库、脚本和内容矩阵提供依据' }],
+  },
+  '湄洲岛 48 小时青年影像创作营': {
+    项目说明: [{ src: '/media/portfolio/work/meizhou.webp', caption: '48 小时成片画面｜在限时与不可补拍条件下完成创作' }],
+    '我的工作 / 职责': [{ src: '/media/portfolio/work/meizhou-behind.webp', caption: '创作现场｜导演、策划、摄影与剪辑协同推进' }],
+  },
+  '《THE NEXT WINTER》定格动画创作': {
+    项目说明: [{ src: '/media/portfolio/work/stopmotion.webp', caption: '定格动画成片画面｜一周内独立完成完整作品' }],
+    '我的工作 / 职责': [{ src: '/media/portfolio/work/stopmotion-story.webp', caption: '故事与分镜设计｜从原创剧本推进到逐帧拍摄' }],
+  },
+  '红动粤东·数字人微课': {
+    项目说明: [{ src: '/media/portfolio/work/aigc.webp', caption: '数字人微课画面｜用 AIGC 优化持续内容生产' }],
+    '我的工作 / 职责': [{ src: '/media/portfolio/work/aigc-program.webp', caption: '节目脚本与制作方案｜数字人表达和内容流程设计' }],
+  },
+}
+
+const LINK_COVERS: Record<string, string[]> = {
+  谢幺幺爱跳操: ['/media/portfolio/keep/yyao-card-01.webp', '/media/portfolio/keep/yyao-card-02.webp', '/media/portfolio/keep/yyao-card-03.webp'],
+  'K 教｜AI 漫剧 × 消费品': ['/media/portfolio/keep/kjiao-video-01.webp', '/media/portfolio/keep/kjiao-video-02.webp'],
+  'Keep 官方账号': ['/media/portfolio/keep/official-video.webp'],
+  商业内容制作与交付: Array(7).fill('/media/portfolio/work/sjc.webp'),
+  '三创赛｜直播电商运营': ['/media/portfolio/work/sanchuang-results.webp', '/media/portfolio/work/sanchuang.webp', '/media/portfolio/work/sanchuang-social.webp', '/media/portfolio/work/sanchuang-results.webp'],
+  数字人直播间: ['/media/portfolio/work/digitalhuman.webp', '/media/portfolio/work/digitalhuman-backend.webp'],
+  解困式报道: ['/media/portfolio/work/solution-video.webp', '/media/portfolio/work/solution.webp', '/media/portfolio/work/research.webp'],
+  '湄洲岛 48 小时青年影像创作营': ['/media/portfolio/work/meizhou.webp'],
+  '《THE NEXT WINTER》定格动画创作': ['/media/portfolio/work/stopmotion.webp'],
+  '红动粤东·数字人微课': ['/media/portfolio/work/aigc.webp', '/media/portfolio/work/aigc-program.webp'],
+}
 
 const ABOUT_TABS = ['简介', '实习经历', '项目结果', '做事方式', 'AI 能力', '我的价值']
 
@@ -60,7 +157,7 @@ function Shell({ eyebrow, title, breadcrumb, onBack, children }: {
           <button className="pc__close" type="button" onClick={closeOverlay} aria-label="关闭">×</button>
         </header>
         <div className="pc__viewport">
-          <header className="pc__page-title">
+          <header className={`pc__page-title${title.length > 12 ? ' pc__page-title--compact' : ''}`}>
             <h2>{title}</h2>
             <p>点击文件夹，逐层查看</p>
           </header>
@@ -117,7 +214,42 @@ function CaseTile({ item, image, onOpen, index }: { item: CaseItem; image: strin
   )
 }
 
-function Block({ block, open = false }: { block: ContentBlock; open?: boolean }) {
+function InlineMedia({ items }: { items: MediaItem[] }) {
+  return (
+    <div className={`pc__inline-media${items.length === 1 ? ' pc__inline-media--single' : ''}`}>
+      {items.map((item) => (
+        <figure key={item.src}>
+          <div className="pc__inline-image"><img src={item.src} alt={item.caption} /></div>
+          <figcaption>{item.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  )
+}
+
+function LinkCovers({ block, covers }: { block: ContentBlock; covers: string[] }) {
+  if (!block.links) return null
+
+  return (
+    <div className="pc__cover-links">
+      {block.links.map((item, index) => {
+        const isDocument = item.href.endsWith('.pdf')
+        const isImage = /\.(webp|png|jpe?g)$/i.test(item.href)
+        return (
+          <a key={item.href + item.label} href={item.href} target="_blank" rel="noreferrer">
+            <img src={covers[index] ?? covers[0]} alt={`${item.label}封面`} />
+            <span className="pc__cover-shade" />
+            <span className="pc__cover-type">{isDocument ? 'PDF' : isImage ? 'IMAGE' : 'VIDEO'}</span>
+            <strong>{item.label}</strong>
+            <span className="pc__cover-action">点击查看 ↗</span>
+          </a>
+        )
+      })}
+    </div>
+  )
+}
+
+function Block({ block, media = [], linkCovers = [], open = false }: { block: ContentBlock; media?: MediaItem[]; linkCovers?: string[]; open?: boolean }) {
   return (
     <details className="pc__block" open={open}>
       <summary>
@@ -129,18 +261,18 @@ function Block({ block, open = false }: { block: ContentBlock; open?: boolean })
         {block.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         {block.bullets && <ul>{block.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}
         {block.metrics && <div className="pc__metrics">{block.metrics.map((item) => <div key={item}>{item}</div>)}</div>}
-        {block.links && (
-          <div className="pc__links">
-            {block.links.map((item) => <a key={item.href + item.label} href={item.href} target="_blank" rel="noreferrer">{item.label}<span>↗</span></a>)}
-          </div>
-        )}
+        {media.length > 0 && <InlineMedia items={media} />}
+        {block.links && <LinkCovers block={block} covers={linkCovers} />}
         {block.note && <p className="pc__note">{block.note}</p>}
       </div>
     </details>
   )
 }
 
-function ProjectDetail({ item, images }: { item: CaseItem; images: string[] }) {
+function ProjectDetail({ item }: { item: CaseItem }) {
+  const sectionMedia = SECTION_MEDIA[item.title] ?? {}
+  const linkCovers = LINK_COVERS[item.title] ?? []
+
   return (
     <article className="pc__detail">
       <header className="pc__detail-head">
@@ -148,11 +280,16 @@ function ProjectDetail({ item, images }: { item: CaseItem; images: string[] }) {
         <h3>{item.title}</h3>
         {item.subtitle && <p>{item.subtitle}</p>}
       </header>
-      <div className={`pc__gallery pc__gallery--${Math.min(images.length, 5)}`}>
-        {images.map((src, index) => <figure key={src}><img src={src} alt={`${item.title} 项目素材 ${index + 1}`} /></figure>)}
-      </div>
       <div className="pc__accordions">
-        {item.blocks.map((block, index) => <Block key={block.title} block={block} open={index === 0} />)}
+        {item.blocks.map((block, index) => (
+          <Block
+            key={block.title}
+            block={block}
+            media={sectionMedia[block.title] ?? []}
+            linkCovers={linkCovers}
+            open={index === 0}
+          />
+        ))}
       </div>
     </article>
   )
@@ -201,7 +338,7 @@ export function ExperienceV4() {
   if (activeFolder && caseIndex !== null) {
     return (
       <Shell eyebrow="02 / EXPERIENCE" title={activeFolder.cases[caseIndex].title} breadcrumb={activeFolder.folder} onBack={() => setCaseIndex(null)}>
-        <ProjectDetail item={activeFolder.cases[caseIndex]} images={media[caseIndex] ?? media[0]} />
+        <ProjectDetail item={activeFolder.cases[caseIndex]} />
       </Shell>
     )
   }
@@ -240,7 +377,7 @@ export function WorkV4() {
   if (projectIndex !== null) {
     return (
       <Shell eyebrow="03 / PROJECTS" title={WORK_V4[projectIndex].title} breadcrumb={`PROJECT ${WORK_V4[projectIndex].no}`} onBack={() => setProjectIndex(null)}>
-        <ProjectDetail item={WORK_V4[projectIndex]} images={WORK_VISUALS[projectIndex].images} />
+        <ProjectDetail item={WORK_V4[projectIndex]} />
       </Shell>
     )
   }

@@ -300,7 +300,7 @@ export const WORK_V4: CaseItem[] = [
       { title: '项目目标', paragraphs: ['通过真实运营实践，验证从账号定位、内容迭代、用户留存到直播转化的完整电商运营路径。'] },
       { title: '我的工作 / 职责', bullets: ['账号从 0 到 1 搭建', '内容策划与短视频制作', '直播脚本与主播执行', '数据复盘与内容优化'] },
       { title: '项目成果', metrics: ['全国大学生电子商务三创赛二等奖', '累计产出原创视频 19 条，总播放量 1.6 万+', 'AI 内容转型后完播率由 2.94% 提升至 19.44%'] },
-      { title: '素材与入口', links: [{ label: '项目成果展示', href: '/media/sanchuang-plan.pdf' }, { label: '自媒体账号视频', href: 'https://pan.baidu.com/s/1ldcKNlQ_IOA3tqCqcTQFdg?pwd=5vbf' }, { label: '账号截图', href: '/media/account-screenshot.jpeg' }, { label: '封面设计', href: '/media/cover-design.png' }] },
+      { title: '素材与入口', links: [{ label: '项目成果展示', href: '/media/sanchuang-plan.pdf' }, { label: '自媒体账号视频', href: 'https://pan.baidu.com/s/1ldcKNlQ_IOA3tqCqcTQFdg?pwd=5vbf' }, { label: '账号截图', href: '/media/portfolio/work/sanchuang-social.webp' }, { label: '封面设计', href: '/media/portfolio/work/sanchuang-results.webp' }] },
     ],
   },
   {
@@ -311,7 +311,7 @@ export const WORK_V4: CaseItem[] = [
       { title: '项目说明', paragraphs: ['依托 Unreal 5、AI 语音合成与自然语言处理技术，为本土蜂蜜品牌打造虚拟偶像直播与内容生产体系，降低真人直播与视频制作成本，提升农产品品牌宣传与带货效率。'] },
       { title: '我的工作 / 职责', bullets: ['基于 UE5 与 MetaHuman 完成虚拟偶像数字人形象设计，搭建可落地直播的虚拟主播系统', '结合蜂蜜产品特性搭建直播话术与知识语料库，支撑数字人实时互动与产品讲解', '完成蜂蜜科普、产品展示、蜂场研学等短视频标准化拍摄与流水线产出，支撑多平台内容分发'] },
       { title: '项目成果', metrics: ['累计开展 18 场直播', '累计产出 45 条原创短视频，全平台总播放量超 8.6 万', '跑通“直播引流—电商转化—私域沉淀”基础运营链路', '完成数字人形象设计、直播系统搭建及私域社群运营，沉淀用户 500+'] },
-      { title: '素材与入口', links: [{ label: '数字人视频示例', href: '/media/digitalhuman-video-cover.jpeg' }, { label: '后台设置截图', href: '/media/digitalhuman-backend.png' }] },
+      { title: '素材与入口', links: [{ label: '数字人视频示例', href: '/media/portfolio/work/digitalhuman.webp' }, { label: '后台设置截图', href: '/media/portfolio/work/digitalhuman-backend.webp' }] },
     ],
   },
   {
@@ -355,7 +355,7 @@ export const WORK_V4: CaseItem[] = [
       { title: '项目说明', paragraphs: ['原有微课制作流程周期较长、产能有限，在持续输出需求下，开始尝试用 AIGC 工具和数字人形式优化制作流程，提高内容生产效率。'] },
       { title: '我的工作 / 职责', bullets: ['微课内容策划', '数字人视频制作', 'AIGC 工具测试与实际应用'] },
       { title: '项目成果', metrics: ['视频月产量由 1 条提升至 4 条', '获“互联网+”广东省二等奖 / 国创赛广东省三等奖', '完成 AIGC 工具在真实内容生产流程中的落地实践'] },
-      { title: '素材与入口', links: [{ label: '数字人微课片段', href: 'https://weixin.qq.com/sph/AXIQ8JWpGm' }, { label: '脚本 / 分镜展示', href: '/media/aigc-script-showcase.jpg' }] },
+      { title: '素材与入口', links: [{ label: '数字人微课片段', href: 'https://weixin.qq.com/sph/AXIQ8JWpGm' }, { label: '脚本 / 分镜展示', href: '/media/portfolio/work/aigc-program.webp' }] },
     ],
   },
 ]
