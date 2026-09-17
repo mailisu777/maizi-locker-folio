@@ -1,7 +1,7 @@
 import { RoundedBox } from '@react-three/drei'
-import { useMemo } from 'react'
+import { useMemo, type ReactNode } from 'react'
 import { CanvasTexture, SRGBColorSpace } from 'three'
-import { activateHotspot } from './hotspotActions'
+import { useStore } from '../store'
 
 const SHADOWS = { castShadow: true, receiveShadow: true } as const
 
@@ -26,12 +26,12 @@ function useLabelTexture(lines: string[], bg = '#f7f6f2', fg = '#171717', accent
   }, [lines, bg, fg, accent])
 }
 
-function Interactive({ id, children }: { id: 'about' | 'skills' | 'work' | 'contact'; children: React.ReactNode }) {
+function Interactive({ id, children }: { id: 'about' | 'skills' | 'work' | 'contact'; children: ReactNode }) {
   return (
     <group
       onClick={(e) => {
         e.stopPropagation()
-        activateHotspot(id)
+        useStore.getState().openOverlay(id, 'nav')
       }}
       onPointerOver={(e) => {
         e.stopPropagation()
@@ -131,12 +131,22 @@ function PhoneModel() {
     ctx.font = '800 42px Arial'
     ctx.fillText('SOCIAL / YUEYUE', 48, 95)
     ctx.fillStyle = '#8964E8'
-    ctx.beginPath(); ctx.arc(78, 180, 30, 0, Math.PI * 2); ctx.fill()
-    ctx.fillStyle = '#222'; ctx.font = '700 28px Arial'; ctx.fillText('AI CONTENT & SOCIAL', 130, 188)
-    ctx.fillStyle = '#d9d7d2'; ctx.fillRect(48, 250, 504, 500)
-    ctx.fillStyle = '#111'; ctx.font = '900 64px Arial'; ctx.fillText('KEEP', 88, 500)
-    ctx.fillStyle = '#8964E8'; ctx.fillRect(48, 785, 160, 18)
-    ctx.fillStyle = '#999'; ctx.fillRect(48, 840, 430, 15); ctx.fillRect(48, 880, 360, 15)
+    ctx.beginPath()
+    ctx.arc(78, 180, 30, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.fillStyle = '#222'
+    ctx.font = '700 28px Arial'
+    ctx.fillText('AI CONTENT & SOCIAL', 130, 188)
+    ctx.fillStyle = '#d9d7d2'
+    ctx.fillRect(48, 250, 504, 500)
+    ctx.fillStyle = '#111'
+    ctx.font = '900 64px Arial'
+    ctx.fillText('KEEP', 88, 500)
+    ctx.fillStyle = '#8964E8'
+    ctx.fillRect(48, 785, 160, 18)
+    ctx.fillStyle = '#999'
+    ctx.fillRect(48, 840, 430, 15)
+    ctx.fillRect(48, 880, 360, 15)
     const tex = new CanvasTexture(canvas)
     tex.colorSpace = SRGBColorSpace
     return tex
