@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { ABOUT_V4, CONTACT_V4, EXPERIENCE_V4, MORE_WORK_V4, WORK_V4, type ContentBlock } from '../../data/portfolioV4'
 import { useStore } from '../../store'
 import './portfolio-content.css'
@@ -34,7 +35,7 @@ function Block({ block }: { block: ContentBlock }) {
   )
 }
 
-function Shell({ eyebrow, title, children }: { eyebrow: string; title: string; children: React.ReactNode }) {
+function Shell({ eyebrow, title, children }: { eyebrow: string; title: string; children: ReactNode }) {
   return (
     <div className="ov pc">
       <div className="pc__sheet">
