@@ -1,24 +1,17 @@
-/* 站点全部文案与作品数据 —— 与参考逐帧核对整理 */
-
 export const SITE = {
-  owner: 'AVA LI',
-  tagline: "AVA LI — PORTFOLIO '26",
+  owner: '黎悦悦',
+  tagline: "YUEYUE — PORTFOLIO '26",
   year: '2026',
 }
 
-/* ── 出处与源码 ───────────────────────────────────────
- * 本站是对小红书博主 momo 的 Locker 个人网站的复刻练习：视觉创意归原作者，
- * 这条出处要一直挂在页面上（左下角 Credit 组件），不是只写在 README 里。
- * repoUrl 是开源仓库地址，换仓库时只改这一处。 */
 export const CREDIT = {
   author: 'momo',
   platform: '小红书',
   originUrl:
     'https://www.xiaohongshu.com/discovery/item/6a852ae7000000002500b24e?xsec_token=ABxWdb99F51QhPGOvNNuLGxYSbTeGIKFnMDujjIeP1Kr8=',
-  repoUrl: 'https://github.com/qzz0518/locker-folio',
+  repoUrl: 'https://github.com/mailisu777/maizi-locker-folio',
 }
 
-/* ── 顶部导航 ─────────────────────────────────────────── */
 export const NAV = [
   { id: 'about', label: 'ABOUT' },
   { id: 'skills', label: 'SKILLS' },
@@ -26,30 +19,28 @@ export const NAV = [
   { id: 'contact', label: 'CONTACT' },
 ] as const
 
-/* ── ABOUT：工牌 ─────────────────────────────────────── */
 export const ABOUT = {
-  cardNo: 'NO. xxx',
+  cardNo: 'NO. 2027',
   title: ['BASIC', 'INFORMATION'],
   titleCn: '个人简介',
-  sub: 'PERSONAL PORTFOLIO ID CARD',
+  sub: 'AI CONTENT / SOCIAL / GROWTH',
   fields: [
-    { k: 'NAME / 姓名', v: 'XXX' },
-    { k: 'GENDER / 性别', v: 'XXX' },
-    { k: 'AGE / 年龄', v: 'XXX' },
-    { k: 'CLASS / 班级', v: 'XXX' },
-    { k: 'EDUCATION / 学历', v: 'XXX' },
-    { k: 'MAJOR / 专业', v: 'XXX' },
+    { k: 'NAME / 姓名', v: '黎悦悦' },
+    { k: 'GRADE / 届别', v: '2027届' },
+    { k: 'SCHOOL / 学校', v: '汕头大学' },
+    { k: 'MAJOR / 专业', v: '网络与新媒体' },
+    { k: 'FOCUS / 方向', v: 'AI内容 / 社媒运营' },
+    { k: 'CITY / 城市', v: '深圳 / 广州优先' },
   ],
-  email: 'xxx',
-  phone: 'xxx',
-  stampTop: 'CERTIFIED',
-  stampMid: 'xxx',
-  stampRing: 'PERSONAL PORTFOLIO · xxx ·',
-  footL: 'IN MY CREATIVE ERA',
-  footR: 'PERSONAL DESIGN PORTFOLIO · 2026',
+  email: 'PORTFOLIO / 2026',
+  phone: 'OPEN TO WORK',
+  stampTop: 'CONTENT',
+  stampMid: 'AI + SOCIAL',
+  stampRing: 'PERSONAL PORTFOLIO · YUEYUE ·',
+  footL: 'MAKE CONTENT MOVE',
+  footR: 'PERSONAL PORTFOLIO · 2026',
 }
 
-/* ── SKILLS：三张卡片 ─────────────────────────────────── */
 export type SkillCard = {
   no: string
   kicker: string
@@ -63,53 +54,53 @@ export type SkillCard = {
 export const SKILLS: SkillCard[] = [
   {
     no: '01',
-    kicker: '01 / VISUAL DESIGN',
-    title: '视觉设计',
-    desc: '以排版、色彩与图像建立可被记住的视觉秩序。',
+    kicker: '01 / CONTENT STRATEGY',
+    title: '内容策划',
+    desc: '从选题、脚本到发布与复盘，围绕平台语境做内容设计。',
     rows: [
-      { k: 'GRAPHIC', v: 'Photoshop / Illustrator' },
-      { k: 'LAYOUT', v: 'InDesign / Figma' },
-      { k: 'MOTION', v: 'After Effects / C4D' },
+      { k: 'SHORT VIDEO', v: '选题 / 脚本 / 分镜 / 剪辑' },
+      { k: 'SOCIAL', v: '抖音 / 小红书 / 微博 / 视频号' },
+      { k: 'TREND', v: '热点拆解 / 爆款结构复刻' },
     ],
-    bg: '#1b28d8',
+    bg: '#111111',
     fg: '#ffffff',
   },
   {
     no: '02',
-    kicker: '02 / DATA & INSIGHT',
-    title: '数据分析',
-    desc: '整理、分析并解释数据，为叙事与决策建立清晰依据。',
+    kicker: '02 / AI CONTENT',
+    title: 'AI 内容',
+    desc: '把生成式工具融入视觉、视频和内容生产流程。',
     rows: [
-      { k: 'ANALYSIS', v: 'SPSS / SQL / Python' },
-      { k: 'WORKFLOW', v: 'Excel / VLOOKUP / 数据透视表' },
+      { k: 'IMAGE', v: '即梦 / Nano Banana / Recraft' },
+      { k: 'VIDEO', v: 'AI真人视频 / 场景替换 / 角色一致性' },
+      { k: 'WORKFLOW', v: '提示词设计 / 素材迭代 / 效果复盘' },
     ],
-    bg: '#c8f322',
-    fg: '#12140f',
+    bg: '#8964E8',
+    fg: '#ffffff',
   },
   {
     no: '03',
-    kicker: '03 / GENERATIVE PRACTICE',
-    title: 'AI 工具',
-    desc: '把生成式工具融入研究、视觉试验与创意内容生产。',
+    kicker: '03 / SOCIAL & GROWTH',
+    title: '运营与增长',
+    desc: '关注内容表现、平台分发与互动反馈，并持续调整方向。',
     rows: [
-      { k: 'IMAGE', v: 'Recraft / 即梦 AI / Nano Banana' },
-      { k: '3D', v: '焦点 AI / 混元 AI / Tripo' },
-      { k: 'RESEARCH', v: 'Gemini / GPT' },
+      { k: 'OPERATION', v: '账号运营 / 发布 / 评论反馈' },
+      { k: 'DATA', v: '播放 / 留存 / CTR / CPE / CPM' },
+      { k: 'GROWTH', v: '内容测试 / 复盘 / 迭代' },
     ],
-    bg: '#ffffff',
-    fg: '#14161a',
+    bg: '#f5f3ee',
+    fg: '#151515',
   },
 ]
 
-/* ── SELECTED WORK：四个文件夹 ───────────────────────── */
 export const FOLDERS = [
   {
     id: 'video',
-    en: ['VIDEO'],
-    cn: '影像作品',
-    bg: '#0b0b0d',
-    fg: '#e0322a',
-    cnFg: '#e0322a',
+    en: ['AI', 'VIDEO'],
+    cn: 'AI影像与短视频',
+    bg: '#111111',
+    fg: '#8964E8',
+    cnFg: '#ffffff',
     x: -30,
     y: 12,
     rot: -6,
@@ -117,11 +108,11 @@ export const FOLDERS = [
   },
   {
     id: 'design',
-    en: ['DESIGN'],
-    cn: '视觉类设计',
-    bg: '#c8f322',
-    fg: '#1b28d8',
-    cnFg: '#1b28d8',
+    en: ['SOCIAL', 'CONTENT'],
+    cn: '社媒内容与视觉',
+    bg: '#8964E8',
+    fg: '#ffffff',
+    cnFg: '#ffffff',
     x: 0,
     y: 0,
     rot: -7,
@@ -129,11 +120,11 @@ export const FOLDERS = [
   },
   {
     id: 'photograph',
-    en: ['PHOTO', 'GRAPH'],
-    cn: '摄影作品',
-    bg: '#1b28d8',
-    fg: '#c8f322',
-    cnFg: '#ffffff',
+    en: ['ACCOUNT', 'PROJECT'],
+    cn: '账号与栏目项目',
+    bg: '#e9e7e2',
+    fg: '#111111',
+    cnFg: '#111111',
     x: 30,
     y: -18,
     rot: 3,
@@ -141,8 +132,8 @@ export const FOLDERS = [
   },
   {
     id: 'website',
-    en: ['WEBSITE', '&', 'WRITING'],
-    cn: '文字作品',
+    en: ['CAMPAIGN', '&', 'WRITING'],
+    cn: '活动与文案项目',
     bg: '#f8f8f6',
     fg: '#14161a',
     cnFg: '#14161a',
@@ -153,44 +144,40 @@ export const FOLDERS = [
   },
 ] as const
 
-/* ── DESIGN › 01 POSTERS ─────────────────────────────── */
 export const POSTERS = [
-  { src: 'greenapple', title: 'GREEN APPLE' },
-  { src: 'happynewyear', title: 'HAPPY NEW YEAR' },
-  { src: 'streamnow', title: 'STREAM NOW' },
-  { src: 'butterfly', title: '无人之境 · UNMANNED REALM' },
-  { src: 'frangipani', title: 'WHERE FRANGIPANI FALLS' },
-  { src: 'chocaward', title: '年度创新糖巧奖' },
-  { src: 'childhood', title: 'HELLO CHILDHOOD MEMORIES' },
-  { src: 'yexing', title: '夜行之梦 · DREAM IN FLIGHT' },
-  { src: 'chocmint', title: '薄荷味夹心黑巧克力' },
-  { src: 'grassfest', title: '草地音乐节 · GRASS FEST' },
-  { src: 'research', title: 'US-CHINA RESEARCH TRENDS' },
+  { src: 'greenapple', title: 'SOCIAL CONTENT' },
+  { src: 'happynewyear', title: 'K教栏目' },
+  { src: 'streamnow', title: 'AI真人视频' },
+  { src: 'butterfly', title: '热量刺客图文' },
+  { src: 'frangipani', title: '户外穿搭内容' },
+  { src: 'chocaward', title: '泡沫轴跟练' },
+  { src: 'childhood', title: '活动传播' },
+  { src: 'yexing', title: '账号内容测试' },
+  { src: 'chocmint', title: 'Keep 社媒内容' },
+  { src: 'grassfest', title: '品牌联动' },
+  { src: 'research', title: '数据复盘' },
 ]
 
-/* ── DESIGN › 02 MAGAZINE ────────────────────────────── */
 export const MAGAZINE_PAGES = ['m1', 'm2', 'm3', 'm4', 'm5', 'm6']
 
-/* ── DESIGN › 03 IP DESIGN ───────────────────────────── */
 export const IP_DESIGN = {
-  kicker: '03 / IP DESIGN',
-  title: 'IP DESIGN',
-  cn: 'IP 形象设计',
-  desc: '围绕一个圆润的原创角色展开：从基础形体、材质到延展物料，建立一套可复用的形象语言。',
+  kicker: '03 / AI CONTENT SYSTEM',
+  title: 'AI CONTENT',
+  cn: 'AI 内容工作流',
+  desc: '围绕人物一致性、场景生成、视频改造和内容适配，建立可复用的 AI 内容生产流程。',
   swatches: [
-    { name: 'CLAY', hex: '#e3d3bb' },
-    { name: 'SAND', hex: '#d6c3a5' },
-    { name: 'CREAM', hex: '#f2eadd' },
-    { name: 'INK', hex: '#2c2925' },
+    { name: 'KEEP PURPLE', hex: '#8964E8' },
+    { name: 'INK', hex: '#171717' },
+    { name: 'PAPER', hex: '#f5f3ee' },
+    { name: 'GREY', hex: '#b8b6b0' },
   ],
   specs: [
-    { k: 'FORM', v: '球体 / 圆角几何体' },
-    { k: 'MATERIAL', v: '哑光陶土 · 微磨砂' },
-    { k: 'OUTPUT', v: '3D 模型 / 表情包 / 周边' },
+    { k: 'INPUT', v: '参考素材 / 脚本 / 角色设定' },
+    { k: 'PROCESS', v: '提示词 / 生成 / 迭代 / 精修' },
+    { k: 'OUTPUT', v: '图片 / 真人视频 / 社媒物料' },
   ],
 }
 
-/* ── PHOTOGRAPH ──────────────────────────────────────── */
 export const PHOTOS = [
   'p1', 'p4', 'p2', 'p6',
   'p5', 'p3', 'p6', 'p1',
@@ -198,70 +185,62 @@ export const PHOTOS = [
   'p6', 'p1', 'p3', 'p5',
 ]
 
-/* ── VIDEO ───────────────────────────────────────────── */
 export const VIDEOS = [
   {
     no: '01',
-    en: 'CHARACTER PV',
-    cn: '动漫单人角色 PV',
-    desc: 'Minimax 辅助生成制作二次元风格单人角色宣传短片',
+    en: 'AI REAL PERSON VIDEO',
+    cn: 'AI真人视频项目',
+    desc: '角色一致性、镜头设计、场景替换与内容适配。',
     cover: 'pv1',
-    href: 'https://www.feicut.com/fv/FVf0hc366wam?cm=1&fc=2&p=0',
-  },
-  {
-    no: '02',
-    en: 'ACTION CUT',
-    cn: '动作向动漫 PV',
-    desc: '多角色动作分镜与节奏剪辑试验',
-    cover: 'pv2',
-    href: 'https://www.feicut.com/fv/FVbhfppjrege?cm=1&fc=1&p=0',
-  },
-]
-
-/* ── WEBSITE & WRITING ───────────────────────────────── */
-/* href 是占位：三个站点还没有可公开的正式地址，一律先指向 '#'，
-   面板上的 OPEN PROJECT 同时带 aria-disabled。拿到真实链接后只改这三处。
-   glow 是每张封面的主色，用来喂 .wsc__glow 的背景光晕 —— 原来那三个值
-   （#f6e9c8 / #f7dcd8 / #dceccd）是掺了大量白的浅色，铺在 --paper #f8f7fa 上
-   几乎没有色差，看不出光晕；这里往各自封面的主色方向加饱和度。 */
-export const WEBSITES = [
-  {
-    no: '01',
-    slug: 'COFFEE / IN CHINA',
-    title: ['Coffee / In', 'China'],
-    kicker: 'DATA JOURNALISM · WEB',
-    desc: '中国咖啡市场在消费降级、价格竞争与情绪经济之间的增长逻辑。',
-    cover: 'coffee',
-    glow: '#f2d49a', // 咖啡封面的焦糖黄
     href: '#',
   },
   {
     no: '02',
-    slug: 'SHORT DRAMA / OVERSEAS',
-    title: ['Short Drama /', 'Overseas'],
-    kicker: 'FEATURE · WEB',
-    desc: '短剧出海：内容工业化生产与海外分发链路的一次拆解。',
+    en: 'SOCIAL SHORT VIDEO',
+    cn: '社媒短视频项目',
+    desc: '从选题、脚本、剪辑到发布与复盘的完整流程。',
+    cover: 'pv2',
+    href: '#',
+  },
+]
+
+export const WEBSITES = [
+  {
+    no: '01',
+    slug: 'KJIAO / SOCIAL',
+    title: ['K教 /', 'Social IP'],
+    kicker: 'CONTENT STRATEGY · SOCIAL',
+    desc: '品牌真人 IP 的账号诊断、内容线设计、选题拆解与脚本适配。',
+    cover: 'coffee',
+    glow: '#c8b8f4',
+    href: '#',
+  },
+  {
+    no: '02',
+    slug: 'AI / CONTENT',
+    title: ['AI /', 'Content'],
+    kicker: 'AIGC · VIDEO',
+    desc: 'AI 真人视频、背景替换、角色一致性与视觉素材生产。',
     cover: 'drama',
-    glow: '#f0bfa4', // 短剧封面的暖橘
+    glow: '#d8d8d8',
     href: '#',
   },
   {
     no: '03',
-    slug: 'WECHAT / ARTICLE',
-    title: ['WeChat /', 'Article'],
-    kicker: 'EDITORIAL · 图文',
-    desc: '公众号长图文写作与版式：把调研转成可读、可传播的叙事。',
+    slug: 'CAMPAIGN / SOCIAL',
+    title: ['Campaign /', 'Social'],
+    kicker: 'SOCIAL · COPY',
+    desc: '品牌活动、微博文案、视频号内容与平台传播适配。',
     cover: 'wechat',
-    glow: '#d7e3a4', // 图文封面的草绿
+    glow: '#cabcf4',
     href: '#',
   },
 ]
 
-/* ── CONTACT：软木板便签 ─────────────────────────────── */
-export const NOTE_COLORS = ['#cfe0c3', '#f0e6a8', '#e8b7b7', '#a9c9dd', '#e5cfe0', '#d8cdb8']
+export const NOTE_COLORS = ['#d8d1f2', '#ece9e3', '#d7d7d7', '#bfb5e9', '#e5dff5', '#d8d8d8']
 
 export const SEED_NOTES = [
-  { id: 's1', text: '', color: '#cfe0c3', x: 14, y: 42, rot: -2 },
-  { id: 's2', text: '', color: '#f0e6a8', x: 70, y: 12, rot: 3 },
-  { id: 's3', text: '', color: '#e8b7b7', x: 80, y: 33, rot: -3 },
+  { id: 's1', text: 'AI CONTENT', color: '#d8d1f2', x: 14, y: 42, rot: -2 },
+  { id: 's2', text: 'SOCIAL MEDIA', color: '#ece9e3', x: 70, y: 12, rot: 3 },
+  { id: 's3', text: 'OPEN TO WORK', color: '#d7d7d7', x: 80, y: 33, rot: -3 },
 ]
