@@ -161,10 +161,10 @@ function usePrintedLabel(kind: 'selected-work' | 'contact' | 'skills') {
       context.textBaseline = 'middle'
       context.font = '800 104px sans-serif'
       context.fillStyle = '#36afc4'
-      context.fillText('个人技能', canvas.width / 2, 178)
-      context.font = '900 112px Georgia, serif'
+      context.fillText('实习经历', canvas.width / 2, 178)
+      context.font = '900 72px Georgia, serif'
       context.fillStyle = '#df7b42'
-      context.fillText('SKILLS', canvas.width / 2, 315)
+      context.fillText('EXPERIENCE', canvas.width / 2, 315)
       context.strokeStyle = '#d8c7aa'
       context.lineWidth = 5
       context.beginPath()
