@@ -76,15 +76,15 @@ export function AboutV4() {
             <h3>EXPERIENCE SNAPSHOT</h3>
           </div>
           <div className="aboutv4__timeline">
-            <article className="aboutv4__job">
-              <div className="aboutv4__job-no">01 / SJC</div>
-              <h4>{sjc.title}</h4>
-              <AboutCopy block={sjc} />
-            </article>
             <article className="aboutv4__job aboutv4__job--dark">
-              <div className="aboutv4__job-no">02 / KEEP</div>
+              <div className="aboutv4__job-no">01 / KEEP</div>
               <h4>{keep.title}</h4>
               <AboutCopy block={keep} />
+            </article>
+            <article className="aboutv4__job">
+              <div className="aboutv4__job-no">02 / SJC</div>
+              <h4>{sjc.title}</h4>
+              <AboutCopy block={sjc} />
             </article>
           </div>
         </section>
