@@ -7,20 +7,44 @@ import { APPROACH_KEYS } from './cameraPath'
 import LightsAndShadows from './LightsAndShadows'
 import LockerModel from './LockerModel'
 import PerformanceGovernor from './PerformanceGovernor'
-import { CameraReturn } from './Hotspots'
-import { CustomCavityProps, CustomDoorProps } from './CustomPortfolioProps'
+import DecalField from './DecalField'
+import {
+  DOOR1_DECALS,
+  DOOR2_INNER_DECALS,
+  DOOR4_DECALS,
+  ID_CARD_HOOK_AT,
+} from './decalSpecs'
+import { CameraReturn, DoorHotspots, WorldHotspots } from './Hotspots'
+import { DOOR_H, DOOR_W } from './lockerSpec'
+import { IdCardHookModel } from './PhysicalProps'
+import {
+  CavityProps,
+  DoorFourMountedProps,
+  DoorOneMountedProps,
+  DoorTwoMountedProps,
+  FrontProps,
+} from './Props'
 import { CAMERA_FAR, CAMERA_FOV, CAMERA_NEAR } from './sceneConfig'
 import ZoomControls, { ZoomInput } from './ZoomControls'
 import './hero.css'
 
-/**
- * 黎悦悦作品集第一版：完整保留原仓库的柜体、镜头、开门和缩放系统，
- * 只把开柜后的物件层替换成与内容方向相关的四个 3D 入口。
- */
-function DoorTwoInnerContent() {
+function DoorTwoInnerContent({ interactive }: { interactive: boolean }) {
   return (
-    <group name="Door_02_YueyueContent">
-      <CustomDoorProps />
+    <group name="Door_02_InteractiveContent">
+      <group name="Door_02_IdCardHook" position={[...ID_CARD_HOOK_AT]}>
+        <IdCardHookModel />
+      </group>
+      <Suspense fallback={null}>
+        <DecalField
+          name="Decals_Door02_Inner"
+          specs={DOOR2_INNER_DECALS}
+          width={DOOR_W}
+          height={DOOR_H}
+          interactive={interactive}
+        />
+      </Suspense>
+      <DoorTwoMountedProps />
+      <DoorHotspots />
     </group>
   )
 }
@@ -54,17 +78,54 @@ export default function HeroSceneCanvas() {
         <CameraRig />
         <ZoomInput />
         <LightsAndShadows dynamic={caps.animating} />
-
         <LockerModel
           cavityContent={
             <Suspense fallback={null}>
-              <CustomCavityProps />
+              <CavityProps />
             </Suspense>
           }
-          doorInnerContent={<DoorTwoInnerContent />}
-          doorFaceContent={{}}
+          doorInnerContent={
+            <DoorTwoInnerContent interactive={caps.drag} />
+          }
+          doorFaceContent={{
+            0: (
+              <>
+                <Suspense fallback={null}>
+                  <DecalField
+                    name="Decals_Door01_Face"
+                    specs={DOOR1_DECALS}
+                    width={DOOR_W}
+                    height={DOOR_H}
+                    interactive={caps.drag}
+                  />
+                </Suspense>
+                <Suspense fallback={null}>
+                  <DoorOneMountedProps />
+                </Suspense>
+              </>
+            ),
+            3: (
+              <>
+                <Suspense fallback={null}>
+                  <DecalField
+                    name="Decals_Door04_Face"
+                    specs={DOOR4_DECALS}
+                    width={DOOR_W}
+                    height={DOOR_H}
+                    interactive={caps.drag}
+                  />
+                </Suspense>
+                <Suspense fallback={null}>
+                  <DoorFourMountedProps />
+                </Suspense>
+              </>
+            ),
+          }}
         />
-
+        <Suspense fallback={null}>
+          <FrontProps />
+        </Suspense>
+        <WorldHotspots />
         <CameraReturn />
       </Canvas>
       <ZoomControls />
