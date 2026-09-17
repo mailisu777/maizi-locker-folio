@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react'
-import { NAV, SITE } from '../../data/content'
+import { SITE } from '../../data/content'
+import { NAV_V4 } from '../../data/navV4'
 import { FALLBACK_REASON_TEXT, type FallbackReason } from './capabilities'
 import './fallback.css'
 
-export type NavId = (typeof NAV)[number]['id']
+export type NavId = Exclude<(typeof NAV_V4)[number], { href: string }>['id']
 
 export type StaticFallbackProps = {
   /** 触发降级的原因，用于给用户一句解释；不传就不显示说明 */
@@ -58,22 +59,35 @@ export default function StaticFallback({
 
           <nav className="fb__nav" aria-label="内容入口">
             <ul className="fb__list">
-              {NAV.map((n) => (
-                <li key={n.id}>
-                  <button
-                    type="button"
-                    className="fb__entry"
-                    data-active={activeId === n.id}
-                    aria-current={activeId === n.id ? 'true' : undefined}
-                    onClick={() => onSelect?.(n.id)}
-                  >
-                    <span className="fb__entry-label">{n.label}</span>
-                    <span className="fb__entry-arrow" aria-hidden="true">
-                      →
-                    </span>
-                  </button>
-                </li>
-              ))}
+              {NAV_V4.map((n) => {
+                const hasHref = 'href' in n
+                return (
+                  <li key={n.id}>
+                    {hasHref ? (
+                      <a
+                        className="fb__entry"
+                        href={n.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <span className="fb__entry-label">{n.label}</span>
+                        <span className="fb__entry-arrow" aria-hidden="true">→</span>
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        className="fb__entry"
+                        data-active={activeId === n.id}
+                        aria-current={activeId === n.id ? 'true' : undefined}
+                        onClick={() => onSelect?.(n.id)}
+                      >
+                        <span className="fb__entry-label">{n.label}</span>
+                        <span className="fb__entry-arrow" aria-hidden="true">→</span>
+                      </button>
+                    )}
+                  </li>
+                )
+              })}
             </ul>
           </nav>
         </div>
