@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type UIEvent } from 'react'
 import {
   ABOUT_V4,
   CONTACT_V4,
@@ -22,6 +22,8 @@ type FolderVisual = {
 type MediaItem = {
   src: string
   caption: string
+  href?: string
+  type?: 'VIDEO' | 'IMAGE' | 'PDF'
 }
 
 type SectionMedia = Record<string, MediaItem[]>
@@ -136,10 +138,11 @@ const LINK_COVERS: Record<string, string[]> = {
 
 const ABOUT_TABS = ['简介', '实习经历', '项目结果', '做事方式', 'AI 能力', '我的价值']
 
-function Shell({ eyebrow, title, breadcrumb, onBack, children }: {
+function Shell({ eyebrow, title, breadcrumb, detail = false, onBack, children }: {
   eyebrow: string
   title: string
   breadcrumb?: string
+  detail?: boolean
   onBack?: () => void
   children: ReactNode
 }) {
@@ -156,10 +159,10 @@ function Shell({ eyebrow, title, breadcrumb, onBack, children }: {
           </div>
           <button className="pc__close" type="button" onClick={closeOverlay} aria-label="关闭">×</button>
         </header>
-        <div className="pc__viewport">
-          <header className={`pc__page-title${title.length > 7 ? ' pc__page-title--compact' : ''}`}>
+        <div className={`pc__viewport${detail ? ' pc__viewport--detail' : ''}`}>
+          <header className={`pc__page-title${title.length > 7 ? ' pc__page-title--compact' : ''}${detail ? ' pc__page-title--detail' : ''}`}>
             <h2>{title}</h2>
-            <p>点击文件夹，逐层查看</p>
+            <p>{detail ? '作品展示 / 项目拆解' : '点击文件夹，逐层查看'}</p>
           </header>
           {children}
         </div>
@@ -214,45 +217,29 @@ function CaseTile({ item, image, onOpen, index }: { item: CaseItem; image: strin
   )
 }
 
-function InlineMedia({ items }: { items: MediaItem[] }) {
-  return (
-    <div className={`pc__inline-media${items.length === 1 ? ' pc__inline-media--single' : ''}`}>
-      {items.map((item) => (
-        <figure key={item.src}>
-          <div className="pc__inline-image"><img src={item.src} alt={item.caption} /></div>
-          <figcaption>{item.caption}</figcaption>
-        </figure>
-      ))}
-    </div>
-  )
-}
-
-function LinkCovers({ block, covers }: { block: ContentBlock; covers: string[] }) {
-  if (!block.links) return null
+function Block({ block, index = 0, onActivate, onToggle, setRef, open }: {
+  block: ContentBlock
+  index?: number
+  onActivate?: (index: number) => void
+  onToggle?: (index: number) => void
+  setRef?: (node: HTMLDetailsElement | null) => void
+  open?: boolean
+}) {
+  const controlled = typeof open === 'boolean' && Boolean(onToggle)
 
   return (
-    <div className="pc__cover-links">
-      {block.links.map((item, index) => {
-        const isDocument = item.href.endsWith('.pdf')
-        const isImage = /\.(webp|png|jpe?g)$/i.test(item.href)
-        return (
-          <a key={item.href + item.label} href={item.href} target="_blank" rel="noreferrer">
-            <img src={covers[index] ?? covers[0]} alt={`${item.label}封面`} />
-            <span className="pc__cover-shade" />
-            <span className="pc__cover-type">{isDocument ? 'PDF' : isImage ? 'IMAGE' : 'VIDEO'}</span>
-            <strong>{item.label}</strong>
-            <span className="pc__cover-action">点击查看 ↗</span>
-          </a>
-        )
-      })}
-    </div>
-  )
-}
-
-function Block({ block, media = [], linkCovers = [], open = false }: { block: ContentBlock; media?: MediaItem[]; linkCovers?: string[]; open?: boolean }) {
-  return (
-    <details className="pc__block" open={open}>
-      <summary>
+    <details
+      ref={setRef}
+      className="pc__block"
+      {...(controlled ? { open } : {})}
+    >
+      <summary onClick={(event) => {
+        onActivate?.(index)
+        if (controlled) {
+          event.preventDefault()
+          onToggle?.(index)
+        }
+      }}>
         <span>{block.title}</span>
         <span className="pc__summary-plus" aria-hidden="true">+</span>
       </summary>
@@ -261,17 +248,120 @@ function Block({ block, media = [], linkCovers = [], open = false }: { block: Co
         {block.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         {block.bullets && <ul>{block.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}
         {block.metrics && <div className="pc__metrics">{block.metrics.map((item) => <div key={item}>{item}</div>)}</div>}
-        {media.length > 0 && <InlineMedia items={media} />}
-        {block.links && <LinkCovers block={block} covers={linkCovers} />}
+        {block.links && <p className="pc__link-hint">对应作品已显示在左侧，点击作品封面即可查看完整内容。</p>}
         {block.note && <p className="pc__note">{block.note}</p>}
       </div>
     </details>
   )
 }
 
-function ProjectDetail({ item }: { item: CaseItem }) {
+function getLinkMedia(item: CaseItem): MediaItem[] {
+  const linkBlock = item.blocks.find((block) => block.links?.length)
+  const covers = LINK_COVERS[item.title] ?? []
+
+  return linkBlock?.links?.map((link, index) => {
+    const type: NonNullable<MediaItem['type']> = link.href.endsWith('.pdf') ? 'PDF' : /\.(webp|png|jpe?g)$/i.test(link.href) ? 'IMAGE' : 'VIDEO'
+    return {
+      src: covers[index] ?? covers[0],
+      caption: link.label,
+      href: link.href,
+      type,
+    }
+  }).filter((media) => media.src) ?? []
+}
+
+function getSectionMedia(item: CaseItem, index: number | null): MediaItem[] {
   const sectionMedia = SECTION_MEDIA[item.title] ?? {}
-  const linkCovers = LINK_COVERS[item.title] ?? []
+  const linkMedia = getLinkMedia(item)
+  if (index === null) return linkMedia.length ? linkMedia : Object.values(sectionMedia)[0] ?? []
+
+  for (let cursor = index; cursor >= 0; cursor -= 1) {
+    const block = item.blocks[cursor]
+    if (block.links?.length && linkMedia.length) return linkMedia
+    const media = sectionMedia[block.title]
+    if (media?.length) return media
+  }
+
+  return linkMedia.length ? linkMedia : Object.values(sectionMedia)[0] ?? []
+}
+
+function MediaShowcase({ items, label }: { items: MediaItem[]; label: string }) {
+  const [slide, setSlide] = useState(0)
+  const signature = items.map((item) => `${item.src}:${item.href ?? ''}`).join('|')
+
+  useEffect(() => setSlide(0), [signature])
+
+  if (!items.length) {
+    return <div className="pc__showcase-empty">该部分暂无可公开素材</div>
+  }
+
+  const current = items[Math.min(slide, items.length - 1)]
+  const visual = <img key={current.src} src={current.src} alt={current.caption} />
+
+  return (
+    <section className="pc__showcase" aria-label={`${label}作品展示`}>
+      <div className="pc__showcase-meta">
+        <span>{label}</span>
+        <b>{String(slide + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</b>
+      </div>
+      <figure className="pc__showcase-frame">
+        {current.href ? (
+          <a href={current.href} target="_blank" rel="noreferrer" aria-label={`查看${current.caption}`}>
+            {visual}
+            <span className="pc__showcase-type">{current.type ?? 'VIDEO'}</span>
+            <span className="pc__showcase-play" aria-hidden="true">↗</span>
+          </a>
+        ) : visual}
+        <figcaption>{current.caption}</figcaption>
+      </figure>
+      {items.length > 1 && (
+        <div className="pc__showcase-controls">
+          <button type="button" onClick={() => setSlide((slide - 1 + items.length) % items.length)} aria-label="上一张作品">←</button>
+          <div className="pc__showcase-dots">
+            {items.map((media, index) => (
+              <button key={`${media.src}-${index}`} type="button" aria-label={`查看第 ${index + 1} 张作品`} aria-current={slide === index} onClick={() => setSlide(index)} />
+            ))}
+          </div>
+          <button type="button" onClick={() => setSlide((slide + 1) % items.length)} aria-label="下一张作品">→</button>
+        </div>
+      )}
+    </section>
+  )
+}
+
+function ProjectDetail({ item }: { item: CaseItem }) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [openBlocks, setOpenBlocks] = useState<Set<number>>(() => new Set([0]))
+  const copyRef = useRef<HTMLDivElement>(null)
+  const blockRefs = useRef<Array<HTMLDetailsElement | null>>([])
+  const media = getSectionMedia(item, activeIndex)
+
+  function handleToggle(index: number) {
+    setOpenBlocks((current) => {
+      const next = new Set(current)
+      if (next.has(index)) next.delete(index)
+      else next.add(index)
+      return next
+    })
+  }
+
+  function handleCopyScroll(_event: UIEvent<HTMLDivElement>) {
+    const root = copyRef.current
+    if (!root) return
+    const rootTop = root.getBoundingClientRect().top
+    let closest = 0
+    let closestDistance = Number.POSITIVE_INFINITY
+
+    blockRefs.current.forEach((node, index) => {
+      if (!node) return
+      const distance = Math.abs(node.getBoundingClientRect().top - rootTop - 18)
+      if (distance < closestDistance) {
+        closest = index
+        closestDistance = distance
+      }
+    })
+    setActiveIndex(closest)
+  }
 
   return (
     <article className="pc__detail">
@@ -279,16 +369,23 @@ function ProjectDetail({ item }: { item: CaseItem }) {
         <span>{item.no}</span>
         {item.subtitle && <p>{item.subtitle}</p>}
       </header>
-      <div className="pc__accordions">
-        {item.blocks.map((block, index) => (
-          <Block
-            key={block.title}
-            block={block}
-            media={sectionMedia[block.title] ?? []}
-            linkCovers={linkCovers}
-            open={index === 0}
-          />
-        ))}
+      <div className="pc__detail-layout">
+        <MediaShowcase items={media} label={activeIndex === null ? '作品展示' : item.blocks[activeIndex].title} />
+        <div ref={copyRef} className="pc__detail-copy" onScroll={handleCopyScroll}>
+          <div className="pc__accordions">
+            {item.blocks.map((block, index) => (
+              <Block
+                key={block.title}
+                block={block}
+                index={index}
+                onActivate={setActiveIndex}
+                onToggle={handleToggle}
+                setRef={(node) => { blockRefs.current[index] = node }}
+                open={openBlocks.has(index)}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </article>
   )
@@ -336,7 +433,7 @@ export function ExperienceV4() {
 
   if (activeFolder && caseIndex !== null) {
     return (
-      <Shell eyebrow="02 / EXPERIENCE" title={activeFolder.cases[caseIndex].title} breadcrumb={activeFolder.folder} onBack={() => setCaseIndex(null)}>
+      <Shell eyebrow="02 / EXPERIENCE" title={activeFolder.cases[caseIndex].title} breadcrumb={activeFolder.folder} detail onBack={() => setCaseIndex(null)}>
         <ProjectDetail item={activeFolder.cases[caseIndex]} />
       </Shell>
     )
@@ -375,7 +472,7 @@ export function WorkV4() {
 
   if (projectIndex !== null) {
     return (
-      <Shell eyebrow="03 / PROJECTS" title={WORK_V4[projectIndex].title} breadcrumb={`PROJECT ${WORK_V4[projectIndex].no}`} onBack={() => setProjectIndex(null)}>
+      <Shell eyebrow="03 / PROJECTS" title={WORK_V4[projectIndex].title} breadcrumb={`PROJECT ${WORK_V4[projectIndex].no}`} detail onBack={() => setProjectIndex(null)}>
         <ProjectDetail item={WORK_V4[projectIndex]} />
       </Shell>
     )
